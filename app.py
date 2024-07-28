@@ -2,7 +2,7 @@
 # Start Date: 7/27/2024
 # End Date: 7/27/2024
 # Project: Inventory Management - Login Backend
-# Version: 1.00
+# Version: 1.20
 
 # Description:
 """

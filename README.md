@@ -1,6 +1,6 @@
-# Contributers: Israel Showell, Khaled Khan, Brandon Prophete, Ritesh Honnalli
+# Contributors: Israel Showell, Khaled Khan, Brandon Prophete, Ritesh Honnalli
 # Start Date: 7/27/2024
-# End Date: 7/-28-/2024
+# End Date: 7/28/2024
 # Project: Inventory Management - Login Backend
 # Version: 1.30
 

@@ -1,8 +1,8 @@
 # Creator: Israel Showell
 # Start Date: 7/27/2024
-# End Date: 7/27/2024
+# End Date: 7/28/2024
 # Project: Inventory Management - Login Backend
-# Version: 1.20
+# Version: 1.30
 
 # Description:
 """

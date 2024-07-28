@@ -193,7 +193,7 @@ def companyRegistrationForm():
 
     if request.method == 'POST':
         # Checks to make sure all required fields are filled
-        if request.form.get('Skip_Button') or not request.form.get('Skip_Button'):
+        if request.form.get('Skip_Button'):
             return render_template("login.html")
 
         if (request.form["companyName"] != "" and request.form["companyAddress"] != "" and

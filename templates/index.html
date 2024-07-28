@@ -1,43 +1,124 @@
-<!DOCTYPE html>
-<!--Israel Showell-->
-<html lang="en">
-    
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-	
-	<style>
-        a {
-            text-decoration: none;
-            color: #83493; 
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-		
-    </style>
-
-	<!--Looks for the url of a css file that I will add in the future-->
-    <link rel="stylesheet" type=text/css href="{{url_for('static',filename='custom.css')}}">
-
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
-      rel="stylesheet"/>
-</head>
-
-<body>
-<center>
-  <div>
-	<h1>Home</h1>
-	<!--Looks for the login function in the app.py script-->
-	<p><a href="{{ url_for('login') }}"><strong>Login</strong></a></p>
-	<!--Looks for the registrationForm function in the app.py script-->
-	<p><a href="{{ url_for('userRegistrationForm') }}"><strong>Register</strong></a></p>
-  </div>
-  </center>
-</body>
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>Stock Master</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+      <noscript><link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" /></noscript>
+   </head>
+   <body class="is-preload">
+      <!-- Wrapper -->
+      <div id="wrapper">
+         <!-- Header -->
+         <header id="header" class="alt">
+            <span class="logo"><img src="{{ url_for('static', filename='images/logo.svg') }}" alt="" /></span>
+            <h1>Stock Master</h1>
+            <p>Simple, Effective, Affordable<br />
+               built by Fellows who want more for cheap.
+            </p>
+         </header>
+         <!-- Nav -->
+         <nav id="nav">
+            <ul>
+               <li><a href="#intro" class="active">Introduction</a></li>
+               <li><a href="#first">Software</a></li>
+               <li><a href="#second">Support</a></li>
+               <li><a href="{{ url_for('login') }}" ><strong>Login</strong></a></li>
+            </ul>
+         </nav>
+         <!-- Main -->
+         <div id="main">
+            <!-- Introduction -->
+            <section id="intro" class="main">
+               <div class="spotlight">
+                  <div class="content">
+                     <header class="major">
+                        <h2>Who are we</h2>
+                     </header>
+                     <p>Tired of always having to pay a hefty monthly fee, just for trying to manage your products? Well look no more! Here at Stock Master we wish the best experience for those up and coming business owners! Only $20 a month, but the first two weeks are free!!! Even after a month if you're not satisfied with your purchase, there is full refund with no extra fees!</p>
+                     <ul class="actions">
+                        <p><a href="{{ url_for('userRegistrationForm') }}" class="button primary"><strong>Sign Up</strong></a></p>
+                     </ul>
+                  </div>
+                  <span class="image"><img src="{{ url_for('static', filename='images/pic07.jpg') }}" alt="" /></span>
+               </div>
+            </section>
+            <!-- First Section -->
+            <section id="first" class="main special">
+               <header class="major">
+                  <h2>What can we do?</h2>
+               </header>
+               <ul class="features">
+                  <li>
+                     <span class="icon solid major style1 fa-signal"></span>
+                     <h3>Voice-to-text</h3>
+                     <p>Voice to text search functionality that allows an Owner/Customer to describe a product using their voice, then convert their speech into text, and finally take that text and search for items whose description is close to what they are looking for.</p>
+                  </li>
+                  <li>
+                     <span class="icon major style3 fa-folder-open"></span>
+                     <h3>AI assistant</h3>
+                     <p>AI assistant that notifies Owner/Consumer if a product is running low on stock and needs to be ordered, if a product has increased sales and if more should be ordered, if a product has decreased sales and suggest that an item be removed or a price change.</p>
+                  </li>
+                  <li>
+                     <span class="icon major style5 fa-gem"></span>
+                     <h3>Live Notifications</h3>
+                     <p>When an item is purchased via a barcode or item ID, the website/app will automatically decrement the stock of the item by the number of the amount purchased of a specific item, and if an item is returned it will increment by 1.</p>
+                  </li>
+               </ul>
+               <footer class="major">
+                  <ul class="actions special">
+                  </ul>
+               </footer>
+            </section>
+            <!-- Second Section -->
+            <section id="second" class="main special">
+               <header class="major">
+                  <h2>Contact Us</h2>
+                  <p>Here at Stock Master we pride ourselves on our customers and would love to hear your feedback!</p>
+               </header>
+               <ul class="statistics">
+                  <li class="style4">
+                     <span class="icon solid fa-laptop"></span>
+                     <a href="mailto:stockmaster799@gmail.com">Email Us</a> at stockmaster799@gmail.com
+                  </li>
+               </ul>
+               <footer class="major">
+                  <ul class="actions special">
+                  </ul>
+               </footer>
+            </section>
+            <!-- Get Started -->
+            <section id="cta" class="main special">
+               <header class="major">
+                  <h2>Sign Up!</h2>
+                  <p>Convinced your time won't be wasted here? Come on and sign up here!<br />
+                     Your ticket to a better inventory experience awaits!
+                  </p>
+               </header>
+               <footer class="major">
+                  <ul class="actions special">
+                     <li><a href="{{ url_for('login') }}" class="button primary">Register</a></li>
+                  </ul>
+               </footer>
+            </section>
+         </div>
+         <!-- Footer -->
+         <footer id="footer">
+            <section>
+            </section>
+            <section>
+            </section>
+            <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+         </footer>
+      </div>
+      <!-- Scripts -->
+      <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/util.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+   </body>
 </html>
-

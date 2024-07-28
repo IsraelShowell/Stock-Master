@@ -4,30 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Inventory</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Kumbh Sans', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-top: 20px;
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #cc2f88;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input, textarea, button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button, input[type="submit"] {
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        button:hover, input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Update Inventory</h1>
     {% if error %}
-        <p style="color:red">{{ error }}</p>
+        <p class="error">{{ error }}</p>
     {% endif %}
     <form method="POST" action="{{ url_for('update_inventory', product_id=request.args.get('product_id')) }}">
         <label for="product_name">Product Name:</label>
         <input type="text" name="product_name" id="product_name" value="{{ inventory_item[0] }}" required>
-        <br>
+
         <label for="quantity">Quantity:</label>
         <input type="number" name="quantity" id="quantity" value="{{ inventory_item[1] }}" required>
-        <br>
+
         <label for="reorder_level">Reorder Level:</label>
         <input type="number" name="reorder_level" id="reorder_level" value="{{ inventory_item[2] }}" required>
-        <br>
+
         <label for="product_description">Product Description:</label>
         <input type="text" name="product_description" id="product_description" value="{{ inventory_item[3] }}" required>
-        <br>
+
         <label for="product_manufacturer">Product Manufacturer:</label>
         <input type="text" name="product_manufacturer" id="product_manufacturer" value="{{ inventory_item[4] }}" required>
-        <br>
+
         <input type="submit" value="Update Product">
     </form>
-<a href="{{ url_for( 'Inventory' ) }}">Back</a>
+
+    <div class="nav-links">
+        <a href="{{ url_for('Inventory') }}" class="button primary">Back to Inventory</a>
+    </div>
+
 </body>
 </html>

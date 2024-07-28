@@ -5,30 +5,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-	<!--Looks for the url of a css file that I will add in the future-->
-    <link rel="stylesheet" type=text/css href="{{url_for('static',filename='custom.css')}}">
+    <title>Inventory Management Login Page</title>
+    <!-- Link to the custom CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
-      rel="stylesheet"/>
-
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
 </head>
 
 <body>
-<center>
-  <section class="login-section">
-	<h1>Welcome to the Inventory Management Login Page!</h1>
-	<form class="login-form" action="{{ url_for('login') }}" method="POST">
-		<p>Username:<input type="text" name="Username"/></p>
-		<p>Password:<input type="text" name="Password"/></p>
-		<p><input type="submit" name="enter"/></p>
-	</form>
-	<!--Looks for the Home function in the app.py script-->
-	<p><a href="{{ url_for('Home') }}"><strong>Home</strong></a></p>
-	<!--Looks for the registrationForm function in the app.py script-->
-	<p><a href="{{ url_for('userRegistrationForm') }}"><strong>Register</strong></a></p>
-  </section>
-</center>
+    <center>
+        <section class="form-container">
+            <!-- Login Form Header -->
+            <h1 class="header-text">Welcome to the Inventory Management Login Page!</h1>
+
+            <!-- Login Form -->
+            <form class="login-form" action="{{ url_for('login') }}" method="POST">
+                <div class="table-section">
+                    <table>
+                        <tr>
+                            <td class="form-label">Username:</td>
+                            <td class="form-input"><input type="text" name="Username" /></td>
+                        </tr>
+                        <tr>
+                            <td class="form-label">Password:</td>
+                            <td class="form-input"><input type="password" name="Password" /></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="submit" name="enter" class="submit-button" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+            <!-- Navigation Links -->
+            <div class="nav-links">
+                <p><a href="{{ url_for('Home') }}" class="button primary"><strong>Home</strong></a></p>
+                <p><a href="{{ url_for('userRegistrationForm') }}" class="button primary"><strong>Register</strong></a></p>
+            </div>
+        </section>
+    </center>
 </body>
+
 </html>

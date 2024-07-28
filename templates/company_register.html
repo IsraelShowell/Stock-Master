@@ -1,61 +1,68 @@
 <!DOCTYPE html>
 <!--Israel Showell-->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Registration</title>
+
+    <!-- Link to the custom CSS file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet" />
 </head>
+
 <body>
-<center>
-<!--
-This snippet creates a registration form for the company
--->
-    <h1>Register Your Company</h1>
-    <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
-        {{ form.hidden_tag() }}
-
-        <div>
-            {{ form.companyName.label }}<br>
-            {{ form.companyName(size=32) }}<br>
-            {% for error in form.companyName.errors %}
-                <span style="color: red;">[{{ error }}]</span><br>
+    <center>
+        <!-- Registration Form Header -->
+        <h1 class="header-text">Register Your Company</h1>
+        <div class="form-container">
+            <!-- Error Messages -->
+            {% for message in form.companyName.errors %}
+            <div class="error">{{ message }}</div>
             {% endfor %}
-        </div>
-
-        <div>
-            {{ form.companyAddress.label }}<br>
-            {{ form.companyAddress(rows=4, cols=40) }}<br>
-            {% for error in form.companyAddress.errors %}
-                <span style="color: red;">[{{ error }}]</span><br>
+            {% for message in form.companyAddress.errors %}
+            <div class="error">{{ message }}</div>
             {% endfor %}
-        </div>
-
-        <div>
-            {{ form.employeeNumber.label }}<br>
-            {{ form.employeeNumber(size=5) }}<br>
-            {% for error in form.employeeNumber.errors %}
-                <span style="color: red;">[{{ error }}]</span><br>
+            {% for message in form.employeeNumber.errors %}
+            <div class="error">{{ message }}</div>
             {% endfor %}
+
+            <!-- Registration Form -->
+            <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="table-section">
+                    <table>
+                        <tr>
+                            <td>{{ form.companyName.label }}</td>
+                            <td>{{ form.companyName(size=32) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.companyAddress.label }}</td>
+                            <td>{{ form.companyAddress(rows=4, cols=40) }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ form.employeeNumber.label }}</td>
+                            <td class="form-input">{{ form.employeeNumber(size=5) }}</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>{{ form.Submit(class="submit-button") }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+
+            <!-- Skip Button Form -->
+            <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
+                <div class="nav-links">
+                    <p><input type="text" name="Skip_Button" placeholder="Type anything here and click skip to leave this blank!" class="form-input"/></p>
+                    <p><input type="submit" value="Skip" class="submit-button"/></p>
+                </div>
+            </form>
         </div>
-
-        <div>
-            {{ form.Submit() }}
-        </div>
-
-
-        {% if error %}
-            <div style="color: red;">
-                {{ error }}
-            </div>
-        {% endif %}
-    </form>
-
-        <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
-
-		    <p><input type="text" name="Skip_Button" placeholder="Type anything here and click skip!"/></p>
-		    <p><input type="submit" value="Skip"/></p>
-        </form>
-</center>
+    </center>
 </body>
+
 </html>

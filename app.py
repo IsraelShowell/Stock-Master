@@ -22,7 +22,7 @@ app = Flask(__name__)
 # This is used to help protect data being sent by the app.
 # This protection is used to defend against CSRF attacks.
 # (Cross-Site Request Forgery)
-app.secret_key = "__privatekey__"
+app.secret_key = "__private_key__"
 
 
 # All HTML files are located in the 'templates' because that is where render_template looks for HTML files
@@ -230,7 +230,7 @@ def delete_inventory_item():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     # When the button is pressed, the user makes the page send a POST request
-    if request.method == 'POST' and request.form['Username'] != "" and request.form['Password']:
+    if request.method == 'POST' and request.form['Username'] != "" and request.form['Password'] != "":
         # Saves the request's data in variables
         username = request.form['Username']
         password = request.form['Password']
@@ -259,6 +259,9 @@ def login():
             return dashboard()
     elif request.method == 'GET':
         # If the user is just going to the login page, the page is rendered by the program
+        return render_template("login.html")
+    else:
+        request.method = 'GET'
         return render_template("login.html")
 
 

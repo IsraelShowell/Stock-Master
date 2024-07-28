@@ -24,7 +24,7 @@ class userRegisterForm(FlaskForm):
     Password=PasswordField(label="Password",validators=[DataRequired()])
 
     #Creates the phone field and requires users to use it.
-    phoneNumber=IntegerField(label="Enter Mobile Number",validators=[DataRequired()])
+    phoneNumber=IntegerField(label="Mobile Number",validators=[DataRequired()])
 
     # Creates the businessAddress TextAreaField
     Address = TextAreaField(label="Address")

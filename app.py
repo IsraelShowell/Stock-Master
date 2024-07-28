@@ -192,10 +192,12 @@ def companyRegistrationForm():
 
 
     if request.method == 'POST':
-        # Checks to make sure all required fields are filled
+
+        #This allows the user to skip by adding input to the field
         if request.form.get('Skip_Button'):
             return render_template("login.html")
 
+        # Checks to make sure all required fields are filled
         if (request.form["companyName"] != "" and request.form["companyAddress"] != "" and
                 request.form["employeeNumber"] != ""):
             # This allows the user to skip adding a company!

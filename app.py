@@ -280,10 +280,12 @@ def startup():
     #This creates the inventory Table
     user_cursor.execute("""
     CREATE TABLE IF NOT EXISTS inventory(
-        inventory_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        product_id INTEGER PRIMARY KEY AUTOINCREMENT,
         product_name TEXT NOT NULL,
         quantity INTEGER NOT NULL,
         reorder_level INTEGER,
+        product_description TEXT NOT NULL,
+        product_manufacturer
         company_id INTEGER,
         FOREIGN KEY(company_id) REFERENCES companies(company_id)
     )

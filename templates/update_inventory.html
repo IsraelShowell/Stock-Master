@@ -10,7 +10,7 @@
     {% if error %}
         <p style="color:red">{{ error }}</p>
     {% endif %}
-    <form method="POST" action="{{ url_for('update_inventory', product_id=inventory_item[0]) }}">
+    <form method="POST" action="{{ url_for('update_inventory', product_id=request.args.get('product_id')) }}">
         <label for="product_name">Product Name:</label>
         <input type="text" name="product_name" id="product_name" value="{{ inventory_item[0] }}" required>
         <br>
@@ -28,5 +28,6 @@
         <br>
         <input type="submit" value="Update Product">
     </form>
+<a href="{{ url_for( 'Inventory' ) }}">Back</a>
 </body>
 </html>

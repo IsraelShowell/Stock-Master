@@ -52,7 +52,11 @@
             <td>{{ item[3] }}</td>
             <td>{{ item[4] }}</td>
             <td>
-                <a href="{{ url_for('update_inventory', product_id=item.product_id) }}">Update</a>
+                <a href="{{ url_for('update_inventory', product_id=item[6]) }}">Update</a>
+            </td>
+
+            <td>
+                <a href="{{ url_for('delete_inventory_item', product_id=item[6]) }}">Delete</a>
             </td>
         </tr>
         {% endfor %}
@@ -67,5 +71,7 @@
             </ul>
         {% endif %}
     {% endwith %}
+
+<a href="{{ url_for( 'dashboard' ) }}">Back</a>
 </body>
 </html>

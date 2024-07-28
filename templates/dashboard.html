@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <!--Looks for the url of a css file that I will add in the future-->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css') }}">
-
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
@@ -21,12 +19,10 @@
             <p><strong>Number of Employees:</strong> {{ company_info[2] }}</p>
         {% else %}
             <p>No company information available.</p>
+            <a href="{{ url_for('companyRegistrationForm') }}">Want to add your company?</a>
         {% endif %}
-
-
-        <!--Looks for the correct functions in the app.py script-->
        <h4><a href="{{ url_for('Inventory') }}"><strong>Inventory Page</strong></a></h4>
-        <h4><a href="{{ url_for('Home') }}"><strong>Logout</strong></a></h4>
+       <h4><a href="{{ url_for('Home') }}"><strong>Logout</strong></a></h4>
     </section>
 </center>
 </body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--Israel Showell-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Registration</title>
+</head>
+<body>
+<center>
+<!--
+This snippet creates a registration form for the company
+-->
+    <h1>Register Your Company</h1>
+    <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ form.companyName.label }}<br>
+            {{ form.companyName(size=32) }}<br>
+            {% for error in form.companyName.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.companyAddress.label }}<br>
+            {{ form.companyAddress(rows=4, cols=40) }}<br>
+            {% for error in form.companyAddress.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.employeeNumber.label }}<br>
+            {{ form.employeeNumber(size=5) }}<br>
+            {% for error in form.employeeNumber.errors %}
+                <span style="color: red;">[{{ error }}]</span><br>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.Submit() }}
+        </div>
+
+
+        {% if error %}
+            <div style="color: red;">
+                {{ error }}
+            </div>
+        {% endif %}
+    </form>
+
+        <form action="{{ url_for('companyRegistrationForm') }}" method="POST">
+
+		    <p><input type="text" name="Skip_Button" placeholder="Type anything here and click skip!"/></p>
+		    <p><input type="submit" value="Skip"/></p>
+        </form>
+</center>
+</body>
+</html>

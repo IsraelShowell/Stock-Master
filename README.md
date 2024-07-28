@@ -5,9 +5,8 @@
 # Version: 1.00
 
 # Description:
-"""
 This repository hosts the Back-End of the account creation, login, and dashboard functionality of the Inventory Management software.
-"""
+
 
 # Version History:
 # V-1.00: (7-27-24)

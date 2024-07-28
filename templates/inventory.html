@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+</head>
+<body>
+    <h1>Inventory Management</h1>
+
+    <form action="{{ url_for('Inventory') }}" method="POST">
+        <label for="product_name">Product Name:</label>
+        <input type="text" id="product_name" name="product_name" required><br>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required><br>
+
+        <label for="reorder_level">Reorder Level:</label>
+        <input type="number" id="reorder_level" name="reorder_level"><br>
+
+        <label for="product_description">Product Description:</label>
+        <textarea id="product_description" name="product_description" required></textarea><br>
+
+        <label for="product_manufacturer">Product Manufacturer:</label>
+        <input type="text" id="product_manufacturer" name="product_manufacturer"><br>
+
+        <button type="submit">Add Product</button>
+    </form>
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    {% if success %}
+        <p style="color:green;">{{ success }}</p>
+    {% endif %}
+
+    <h2>Current Inventory</h2>
+    <table>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Reorder Level</th>
+            <th>Description</th>
+            <th>Manufacturer</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in inventory_items %}
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
+            <td>
+                <a href="{{ url_for('update_inventory', product_id=item.product_id) }}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

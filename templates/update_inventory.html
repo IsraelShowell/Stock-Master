@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Inventory</title>
+</head>
+<body>
+    <h1>Update Inventory</h1>
+    {% if error %}
+        <p style="color:red">{{ error }}</p>
+    {% endif %}
+    <form method="POST" action="{{ url_for('update_inventory', product_id=inventory_item[0]) }}">
+        <label for="product_name">Product Name:</label>
+        <input type="text" name="product_name" id="product_name" value="{{ inventory_item[0] }}" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" id="quantity" value="{{ inventory_item[1] }}" required>
+        <br>
+        <label for="reorder_level">Reorder Level:</label>
+        <input type="number" name="reorder_level" id="reorder_level" value="{{ inventory_item[2] }}" required>
+        <br>
+        <label for="product_description">Product Description:</label>
+        <input type="text" name="product_description" id="product_description" value="{{ inventory_item[3] }}" required>
+        <br>
+        <label for="product_manufacturer">Product Manufacturer:</label>
+        <input type="text" name="product_manufacturer" id="product_manufacturer" value="{{ inventory_item[4] }}" required>
+        <br>
+        <input type="submit" value="Update Product">
+    </form>
+</body>
+</html>

@@ -18,12 +18,11 @@
 
 <body>
 <center>
-   <form action="{{ url_for('Home') }}" method='post'>
    <h1 style='text-align: center; color: pink; font-size: 50px;'> User Already Exists! Try again with a new username!</h1>
    <!--Looks for the Home function in the app.py script-->
    <p><a href="{{ url_for('Home') }}"><strong>Home</strong></a></p>
    <!--Looks for the registrationForm function in the app.py script-->
-   <p><a class="anchor-button" href="{{ url_for('userRegistrationForm') }}"><strong>Register</strong></a></p>
+   <p><a href="{{ url_for('userRegistrationForm') }}"><strong>Register</strong></a></p>
    <!--Looks for the login function in the app.py script-->
    <p><a href="{{ url_for('login') }}"><strong>Login</strong></a></p>
 </center>

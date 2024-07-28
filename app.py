@@ -33,6 +33,154 @@ def Home():
     # Home is referenced in the HTML files
     return render_template('index.html')
 
+@app.route('/dashboard')
+def dashboard():
+    # Get the username from the session
+    username = session.get('username')
+    # Connect to the database
+    con = sqlite3.connect('inventory-management.db')
+    c = con.cursor()
+
+    # Fetch the user's company information
+    # The query selects the company name, company address, and the number of employees from the companies table.
+    # It uses an INNER JOIN to combine rows from the companies and users tables based on a related column between them.
+    # It joins on the user_id column which is present in both tables.
+    # This ensures that only the companies associated with the logged-in user are selected.
+
+    c.execute("""
+        SELECT company_name, company_address, employee_number 
+        FROM companies 
+        INNER JOIN users ON companies.user_id = users.user_id 
+        WHERE users.username = ?
+    """, (username,))
+
+    #Saves the query in a variable
+    company_info = c.fetchone()
+
+    #This saves the company id to the session
+    company_id = company_info[0]
+    session['company_id'] = company_id
+
+    # Close the database connection
+    con.close()
+
+    # Pass the user's name and company information to the template
+    return render_template('dashboard.html', name=username, company_info=company_info)
+
+#This function updates the inventory dashboard to ensure the user's data is current!
+def fetch_inventory(company_id):
+    con = sqlite3.connect('inventory-management.db')
+    c = con.cursor()
+    c.execute("SELECT product_name, quantity, reorder_level, product_description, product_manufacturer, company_id FROM inventory WHERE company_id = ?", (company_id,))
+    inventory_items = c.fetchall()
+    con.close()
+
+    #This returns a tuple of the selected data
+    return inventory_items
+
+
+@app.route('/inventory', methods=['POST', 'GET'])
+def Inventory():
+
+    #This gets and checks the company_id in session
+    company_id = session.get('company_id')
+    if not company_id:
+        return render_template("dashboard.html")
+
+    #Checks if the page is in POST
+    if request.method == 'POST':
+
+        #Saves the data from the form into these variable
+        product_name = request.form.get('product_name')
+        quantity = request.form.get('quantity')
+        reorder_level = request.form.get('reorder_level')
+        product_description = request.form.get('product_description')
+        product_manufacturer = request.form.get('product_manufacturer')
+
+        #Checks if the fields all have data in them
+        if (product_name and quantity and reorder_level and product_description and product_manufacturer):
+            try:
+                #The program tries to make a connection to the database
+                con = sqlite3.connect('inventory-management.db')
+                c = con.cursor()
+                c.execute(
+                    "INSERT INTO inventory (product_name, quantity, reorder_level, product_description, product_manufacturer, company_id) "
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                    (product_name, quantity, reorder_level, product_description, product_manufacturer, company_id)
+                )
+                #If successful, the product is added into the database!
+                con.commit()
+                con.close()
+
+                # Fetch the updated inventory items
+                inventory_items = fetch_inventory(company_id)
+                return render_template("inventory.html", inventory_items=inventory_items,
+                                       success="Product added successfully!")
+            except Exception as e:
+                #If it fails, the query is stopped and reversed to preserve data integrity
+                con.rollback()
+                con.close()
+
+                #Makes sure that the product list is updated
+                inventory_items = fetch_inventory(company_id)
+                return render_template("inventory.html", inventory_items=inventory_items,
+                                       error="There was an error adding the product: " + str(e))
+        else:
+            # Makes sure that the product list is updated
+            inventory_items = fetch_inventory(company_id)
+            return render_template("inventory.html", inventory_items=inventory_items, error="All fields are required.")
+    else:
+        # Makes sure that the product list is updated
+        inventory_items = fetch_inventory(company_id)
+        return render_template("inventory.html", inventory_items=inventory_items)
+
+
+#This is where the user can update already existing items.
+@app.route('/update_inventory/<int:product_id>', methods=['POST', 'GET'])
+def update_inventory(product_id):
+
+    #Gathers the company id for future use
+    company_id = session.get('company_id')
+    if not company_id:
+        return render_template('dashboard.html')
+
+    #Checks if the system is
+    if request.method == 'POST':
+        product_name = request.form.get('product_name')
+        quantity = request.form.get('quantity')
+        reorder_level = request.form.get('reorder_level')
+        product_description = request.form.get('product_description')
+        product_manufacturer = request.form.get('product_manufacturer')
+
+        if product_name and quantity and reorder_level and product_description and product_manufacturer:
+            try:
+                con = sqlite3.connect('inventory-management.db')
+                c = con.cursor()
+                c.execute(
+                    "UPDATE inventory SET product_name = ?, quantity = ?, reorder_level = ?, product_description = ?, product_manufacturer = ? WHERE product_id = ? AND company_id = ?",
+                    (product_name, quantity, reorder_level, product_description, product_manufacturer, product_id, company_id)
+                )
+                con.commit()
+                con.close()
+                return render_template('inventory.html')
+            except Exception as e:
+                con.rollback()
+                con.close()
+                return render_template("update_inventory.html", error="There was an error updating the product: " + str(e))
+        else:
+            return render_template("update_inventory.html", error="All fields are required.")
+    else:
+        con = sqlite3.connect('inventory-management.db')
+        c = con.cursor()
+        c.execute("SELECT product_name, quantity, reorder_level, product_description, product_manufacturer FROM inventory WHERE product_id = ? AND company_id = ?", (product_id, company_id))
+        inventory_item = c.fetchone()
+        con.close()
+        if inventory_item:
+            return render_template('update_inventory.html', inventory_item=inventory_item)
+        else:
+            return render_template('inventory.html')
+
+
 
 # The Login Page is able to detect POST and GET requests
 # POST sends data, GET gets data
@@ -71,34 +219,6 @@ def login():
         return render_template("login.html")
 
 
-@app.route('/dashboard')
-def dashboard():
-    # Get the username from the session
-    username = session.get('username')
-    # Connect to the database
-    con = sqlite3.connect('inventory-management.db')
-    c = con.cursor()
-
-    # Fetch the user's company information
-    # The query selects the company name, company address, and the number of employees from the companies table.
-    # It uses an INNER JOIN to combine rows from the companies and users tables based on a related column between them.
-    # It joins on the user_id column which is present in both tables.
-    # This ensures that only the companies associated with the logged-in user are selected.
-
-    c.execute("""
-        SELECT company_name, company_address, employee_number 
-        FROM companies 
-        INNER JOIN users ON companies.user_id = users.user_id 
-        WHERE users.username = ?
-    """, (username,))
-
-    company_info = c.fetchone()
-
-    # Close the database connection
-    con.close()
-
-    # Pass the user's name and company information to the template
-    return render_template('dashboard.html', name=username, company_info=company_info)
 
 
 
@@ -285,7 +405,7 @@ def startup():
         quantity INTEGER NOT NULL,
         reorder_level INTEGER,
         product_description TEXT NOT NULL,
-        product_manufacturer
+        product_manufacturer TEXT NOT NULL,
         company_id INTEGER,
         FOREIGN KEY(company_id) REFERENCES companies(company_id)
     )

@@ -6,7 +6,16 @@
 
 # Description:
 This repository hosts the Back-End of the account creation, login, and dashboard functionality of the Inventory Management software.
+This project was designed for a Hackathon hosted by Headstarter AI! Israel developed the Back-End and the basic UI using Python, SQLite, Flask, and HTML/CSS.
+The Front-End was based off of a template from HTML5 UP that we used for our home page, then the other web application's pages were styled after the home page, and Israel connected the Front-End to the Back-End.
 
+# Skills Practiced:
+- Web Application Development
+- Full-Stack Development (Front/Back-End)
+- UI/UX Design
+- Collaboration
+- Meeting a tight deadline
+- HTML/CSS, Python, Flask, SQLite, PythonAnywhere, Javascript (Tech Stack)
 
 # Version History:
 # V-1.00: (7-27-24)
@@ -24,7 +33,8 @@ Israel implemented a functionality to let users add their companies later (2:40 
 
 # Version History:
 # V-1.30: (7-28-24)
-Israel connected and overhauled UI using the team's template (5:11AM)
+Israel connected and overhauled UI using the team's template  (5:11 AM)
+Israel hosted the web application online via PythonAnywhere: https://shdev.pythonanywhere.com/ (5:20 AM)
 
 # Current Features as of V-1.30:
 - A user can create an account, and fill out company information, login into their account, and see their dashboard
@@ -32,6 +42,7 @@ Israel connected and overhauled UI using the team's template (5:11AM)
 - The database is primed and ready to access inventory items
 - A user can now add, delete, or update products on their account
 - A user can now add their company via the dashboard, if they didn't do so during registration
+- Application is avaliable online: https://shdev.pythonanywhere.com/
 - Major UI Improvements
 
 # Future Features to Implement:

@@ -21,20 +21,20 @@ The Front-End was based off of a template from HTML5 UP that we used for our hom
 # V-1.00: (7-27-24)
 Initial Version <br>
 Uploaded to Github <br>
-Israel implemented the account creation, login, dashboard, and database functionality (11:20 PM)
+Implemented the account creation, login, dashboard, and database functionality (11:20 PM)
 
 # Version History:
 # V-1.10: (7-28-24)
-Israel implemented the inventory product addition, deletion, and update functionalities (2:10 AM)
+Implemented the inventory product addition, deletion, and update functionalities (2:10 AM)
 
 # Version History:
 # V-1.20: (7-28-24)
-Israel implemented a functionality to let users add their companies later (2:40 AM)
+Implemented a functionality to let users add their companies later (2:40 AM)
 
 # Version History:
 # V-1.30: (7-28-24)
-Israel connected and overhauled UI using the team's template  (5:11 AM)
-Israel hosted the web application online via PythonAnywhere: https://shdev.pythonanywhere.com/ (5:20 AM)
+Connected and overhauled UI using the team's template  (5:11 AM) <br>
+Hosted the web application online via PythonAnywhere: https://shdev.pythonanywhere.com/ (5:20 AM)
 
 # Current Features as of V-1.30:
 - A user can create an account, and fill out company information, login into their account, and see their dashboard
@@ -50,4 +50,4 @@ Israel hosted the web application online via PythonAnywhere: https://shdev.pytho
 - Make the dashboard support analytics, a search bar, and inventory management
 
 # Known/Possible Bugs:
-- No errors.....yet (Israel)
+- No errors.....yet 
